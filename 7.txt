@@ -1,0 +1,97 @@
+AIM:
+To implement and executed PL|AQL block that holds all types of execution in order database using procedure language concepts.
+
+EXCEPTION:
+In PL|SQL, the user can catch certain run time cursor. Exception can be internally defined by oracle on the user. Exception are used to handle errors that by oracle on the PL|SQL oracle. A PL|SQL contains block to handle exception.
+THERE ARE 3 TYPES OF EXCEPTION:
+1.	Predefdined oracle errors 2.undefined oracle errors 3.undefined errors
+THE DIFFERENT PART OF THE EXCEPTION:
+1.decalare the exception 2.raise an exception.
+3.handle the exception.
+AN EXCEPTION HAS FOUR ATTRIBUTES:
+1.name provide a short description of the problem. 2.type identifies the are of the errors of the exception.
+3.exception code give a numeric representation of the exception. 4.errors message provide addition informed about the exception.
+The predefined divide by zero exception ahs the following values for the attributes.
+1.Name=zero=divide 
+2.type=or(from the oracle engine) 3.Exception code=01476
+
+TYPES OF MORE COMMONLY USED EXCEPTION:
+NO DATE-FOUND	singleton select statement returns to data
+
+TOO MANY-ROWS		singleton select statement returns more than One row data
+INVALID-CURSOR	illegal cursor operation occurred
+VALID-CURSOR	arithmetic conversation or turn ration ever
+Occurred
+ZERO-DIVIDE		attempted to open a cursor that has Personally opened
+OOP-VAL-ON-INDEX	A attempts to open a cursor that has
+personally opened
+NOT-LOGGED-ON	a database call was made without being
+logged into oracle
+BACKED-OUT	portion of a transaction is rolled back
+LOGIN-DENED	If PL|SQL encounter on interval problem.
+PROGRAM ERROR	if PL|SQL encounter an interval problem
+memory is corrupted
+STORAGE ERRORS	if PL|SQL encounted an intervals
+TIME-OUT-ON-RESOURCES	time out occurred while oracle writing for
+a resourced for all at rest
+
+OUTPUT:
+ZERO DIVISION EXCEPTION:
+SQL> set serveroutput on; SQL> begin
+2	dbms_output.put_line(1/0); 
+
+3	end;
+4 / begin
+*
+ERROR at line 1:
+ORA-01476: divisor is equal to zero ORA-06512: at line 2
+
+SQL> begin
+2	dbms_output.put_line(1/0);
+3	exception
+4	when zero_divide then
+5	dbms_output.put_line('division by zero'); 6 end;
+7 /
+division by zero
+
+
+PL/SQL procedure successfully completed.
+
+
+INVALID NUMBER EXCEPTION:
+SQL> begin
+2 insert into depart(deptno)values('101x'); 
+3	exception
+
+
+4	when invalid_number then
+5	dbms_output.put_line('conversion of string to number failed'); 
+6 end;
+7 /
+conversion of string to number failed PL/SQL procedure successfully completed. 
+OTHER EXCEPTION:
+SQL> begin
+2	dbms_output.put_line(1/0);
+3	exception
+4	when others then
+5	dbms_output.put_line('an exception occured'); 6 end;
+7 /
+an exception occured
+
+
+PL/SQL procedure successfully completed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESULT:
+Thus the above procedure for exception handling was excepted successfully and the output is verified.
