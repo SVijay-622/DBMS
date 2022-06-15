@@ -1,0 +1,55 @@
+AIM:
+To implemented database using ER diagram which is used to represented the realtion ship between different entities. An entity is an object in the overall logical structure from database can be expressed graphically by an ER diagram which is built up from following components .
+RECTANGLE REPRESNTED ENTITY SETD.
+ELLIPES      :represented entity sets
+DIAMONDS : represented attributs.
+LINES           :link attributes to entity sets and entity sets to realation
+MAPPING CARDINALITIES:
+It express the number of entity to which another entity can be associated via relationship set. For a binary realtion ship set R between entity set A and B. the mapping cardinalities must be an one of the following,
+One by one 
+One to many 
+Many to one 
+Many to many
+
+LIBRARY DATABASE
+
+BOOK (Book_id, Title, Publisher_Name, Pub_Year) BOOK_AUTHORS (Book_id, Author_Name) 
+PUBLISHER (Name, Address, Phone)
+BOOK_COPIES (Book_id, Branch_id, No-of_Copies) 
+BOOK_LENDING (Book_id, Branch_id, Card_No, Date_Out, Due_Date) 
+LIBRARY_BRANCH (Branch_id, Branch_Name, Address 
+
+
+ER DIAGRAM
+
+
+   
+
+
+ 
+NORMALIZATION
+
+ 
+
+UNF:
+invoice [ invoice_no, invoice_date, cust_name, cust_addr, ( pet_name, procedure, amount ) ]
+1NF:
+invoice [ invoice_no, invoice_date, cust_name, cust_addr ] invoice_pet [ invoice_no, pet_id, pet_name, procedure, amount ]
+note: pet_id was chose as a key because pet_name is a character string and not a good key candidate.
+
+2NF:
+invoice [ invoice_no, invoice_date, cust_name, cust_addr ] invoice_pet [ invoice_no, pet_id, procedure, amount ]
+pet [ pet_id, pet_name ]
+
+3NF:
+invoice [ invoice_no, invoice_date, cust_no (FK) ]
+invoice_pet [ invoice_no (FK), pet_id (FK), procedure, amount ] pet [ pet_id, pet_name ]
+customer [ cust_no, cust_name, cust_street, cust_city, cust_pstlcd ]
+note: cust_no was chose as a key because cust_name is a character string and not a good key candidate. The customer address was broken apart in 3NF. All foreign keys are identified.
+
+
+
+
+
+RESULT:
+Thus the above program for database using ER modeling normalization and implementation for any application was implemented successfully and the output is verified.
