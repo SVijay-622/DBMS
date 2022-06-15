@@ -1,0 +1,137 @@
+AIM:
+
+To generate a data report using application
+PROCEDURE:
+STEP1: Open the sign in oracle
+
+STEP2: Chat->program->MS visual studio->MS visual basic->opennew project.
+STEP3: Save the project and form
+
+STEP4: Select project-> reference->select Microsoft active, data object 2, library 
+STEP5: Select project->components MS ADD control.
+STEP6: Place the free commands button(ADD,UPDATE,CLEAR). 
+STEP7: Tree table(name,branch,GPA ) and three text box for each label and ADDDC tools on form
+STEP8: In oracle ODBS drives configuration dialog box enter was name and password click ok.
+STEP9: In oracle ODBC drives configuration dialog box enters was name and password click ok.
+STEP10: Now right to click connection go to properties provide lab and MS OLEDB provide for oracle and click next
+STEP11: In connection table enters several user,name, password and click next text connection and click ok.
+STEP12: Right click connection and select ass commands.
+
+STEP13: Right click commands go to properties and enters data object as table using down list6 box and select apply disk box
+
+
+
+STEP14: Now click ok on commands all the attributes of the table will be visible.
+
+STEP15: In record source table give commands type as table and select table name and apply and then close.
+STEP16: Now run and enter password.
+
+
+OUTPUT:
+SQL> create table stud1(sid varchar2(10),branchname varchar2(20),cgpa decimal(3,2));
+Table created.
+SQL> insert into stud1 values('s10','cse',7.8); 
+1 row created.
+SQL> insert into stud1 values('s12','cse',8.8);
+ 1 row created.
+SQL> insert into stud1 values('s32','mech',8.2);
+ 1 row created.
+SQL> insert into stud1 values('s21','ece',6.2); 
+1 row created.
+SQL> insert into stud1 values('s25','eee',6.9); 
+1 row created.
+SQL> select * from stud1;
+SID	BRANCHNAME	CGPA
+
+
+s10	cse	7.8
+s12	cse	8.8
+s32	mech	8.2
+s21	ece	6.2
+s25	eee	6.9
+
+
+SQL> commit; Commit complete.
+
+FORM
+
+
+
+ 
+
+
+FORM
+
+ 
+ 
+
+
+ 
+ADD RECORD
+
+SQL> select * from stud1;
+
+SID	BRANCHNAME		CGPA
+
+s18	
+cse	
+8.3	
+s27	ece	7.6	
+s10	cse	7.8	
+s12	cse	8.8	
+s32	mech	8.2	
+s21	ece	6.2	
+s25	eee	6.9	
+
+3	rows selected.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESULT:
+Thus the above procedure for database connectivity with front end tools are implemented successfully and the output is verified.
