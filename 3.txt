@@ -1,0 +1,89 @@
+AIM:
+To implement and executed view, sequence and synonym in SQL structured query language commands.
+SYNTAX :
+VIEW: [is an imaginary table]      
+            Create [algorithm [merge| temptable | undefined ] View[database-name][view-name] As[select statement]
+SEQUENCE:
+(auto create of primary unique key integer values) Create table table-name Column, data type NOT NULL AUTO increment, column 2 date[NULLNOT NULL]);
+INDEXES:
+CREATE [unique full (spatial]index index name [index-type]
+On table1-name(index-col-name…) [index type]
+Col.name [(length)](ASC DESC] Index type
+Using {BTREE|HASH}
+
+1) VIEWS:
+Create a view using aggregate functions to calculate the No of years publish of the customer
+SQL> create view book_pub as select isbn,title,author,round((sysdate-pub_year)/10000)as no_of_yr    from books1;
+View created.
+
+
+
+
+
+SQL> select * from book_pub;
+ISBN	TITLE	AUTHOR	NO_OF_YR
+
+
+I-101	Bold	Raja	0
+I-102	DBMS	Abraham	1
+I-105	Architect	Rajesh	1
+2) SEQUENCE			
+
+Create a sequence and design the student table with the given attributes.
+SQL> create table studentt(s_id number(5) primary key,name varchar2(15),result varchar2(5));
+Table created. 
+SQL> desc student;
+Name	Null?	Type
+
+
+STID	NUMBER(5)
+SNAME	VARCHAR2(10)
+SCLASS	NUMBER(10)
+
+SQL> create sequence s1 start with 1 increment by 1; Sequence created.
+SQL> insert into studentt values(1,'john','p'); 
+1 row created.
+SQL> insert into studentt values(s1.nextval,'ram','f'); 
+1 row created.
+SQL> insert into studentt values(s1.nextval,'balu','p'); 
+1 row created.
+
+
+
+
+
+
+
+
+
+
+SQL> select * from studentt;
+S_ID	NAME	RESULT
+
+
+1	john	p
+2	ram	f
+3	balu	p
+
+3) INDEXES
+To create an index on the Last Name column of the student table CREATE INDEX:
+SQL> create index lastname on studentt(name);
+ Index created.
+
+SQL> desc studentt;
+Name	Null?	Type
+
+
+S_ID	NOT NULL NUMBER(5) 
+NAME		VARCHAR2(15)
+RESULT	VARCHAR2(5)
+
+DROP INDEX:
+SQL> drop index lastname; Index dropped.
+
+
+
+
+
+RESULT:
+Thus the view, sequence is executed and the output is verified successfully.
