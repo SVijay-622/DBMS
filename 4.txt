@@ -1,0 +1,114 @@
+AIM:
+To implement cursors in database programming.
+SYNTAX:
+Cursor declare syntax.
+Declare cursor-name cursor for select statement
+Cursor fetch syntax.
+Fetch [(NEXT)] FROM ] Cursor-name(Nto var name[var-name]);
+Cursor open syntax:
+Open cursor name.
+Cursor close syntax:
+Close cursor name.
+
+
+EXPLICIT CURSOR
+SQL>create table customer(id number(5),name varchar2(20),age number(5), address varchar2(25),salary number(5));
+Table created;
+SQL>insert into customer values(1,’ramesh’,25,’ahmedabad’,15000); 
+1 row created.
+SQL>insert into customer values(2,’khilan’,27,’hyderabad’,25000); 
+
+1 row created.
+
+SQL>insert into customer values(3,’khoshik’,27,’delhi’,20000); 
+
+1 row created.
+
+SQL>insert into customer values(4,’komal’,29,’goa’,70000); 
+
+1 row created.
+
+
+SQL>insert into customer values(5,’karthik’,39,’bhopal’,50000); 
+1 row created.
+SQL> select * from customer;
+            ID NAME              AGE    ADDRESS       SALARY
+
+
+
+1 ramesh	  25          ahemdabad	15000
+2 khilan	  27            hyderabad	25000
+3 khoshik	  27            delhi	20000
+4 komal	  29             goa	70000
+5 karthik	  39            bhopal	50000
+
+
+SQL> set serveroutput on; SQL> declare
+2	c_id customer.id%type;
+3	c_name customer.name%type;
+4	c_addr customer.address%type;
+5	cursor c_cust is
+6	select id,name,address from customer; 
+7	begin
+8	open c_cust;
+9	loop
+10	 fetch c_cust into c_id,c_name,c_addr; 
+11	 EXIT WHEN c_cust%notfound;
+12	dbms_output.put_line(c_id||''||c_name||''||c_addr);
+13	END loop;
+14	close c_cust;
+15	END;
+16	 / 
+
+1rameshahemdabad
+ 2khilanhyderabad 
+3khoshikdelhi 
+4komalgoa 
+5karthikbhopal
+PL/SQL procedure successfully completed.
+
+
+IMPLICIT CURSOR
+
+SQL> declare
+2	total_rows number(2);
+3	begin
+4	UPDATE customer
+5	SET salary=salary+500; 6 IF sql%notfound THEN
+7 dbms_output.put_line('no rows selected'); 8 ELSIF sql%found THEN
+9	total_rows:=sql%rowcount;
+10	dbms_output.put_line(total_rows||'customers selected');
+11	END IF;
+12	END;
+13 /
+5customers selected
+
+
+PL/SQL procedure successfully completed.
+
+ 
+
+Table created.
+Insert loan into values(100,’ashoknagar’,24200); 1 row created;
+Insert loan into values(100,’tnagar’,35000); 1 row created;
+Insert loan into values(100,’besantnagar’,70000); 1 row created;
+Insert loan into values(100,’medavakkam’,95000); 1 row created;
+Insert loan into values(100,’adyar’,85000); 1 row created;
+SQL> select*from loan;
+
+
+LOAN_NO	BRANCH_NAME	LOAN_AMOUNT
+
+
+
+100	ashoknagar	24200
+101	tnagar	35000
+102	besant nagar	70000
+103	medavakkam	95000
+104	adyar	85000
+
+
+
+
+RESULT:
+Thus the above database programming to implicit explicit cursor was implemented successfully the output is verified.
