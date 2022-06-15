@@ -1,0 +1,494 @@
+AIM:
+	To study the semantics of data definition language, data manipulation language and Transaction control Language in SQL Query.
+
+STUDY OF SQL:
+Structured query language to organize manage and retrieve data from relation database.Vendors of likes oracle. IBM,DBS, Sybase and Ingres use SQL as programing language for there database SQL originated with the system project in 1974 at IBM, son José
+RESEARCH CENTER:
+SQL language can be used in two ways, Interactive, Embedded inside another program
+SQL is used to directly operate externs SQL command that is excluded.
+Mostly have a tool that allows interactive execution of the SQL language.
+EG: SQL bases, SQl is embedded based interactively it can be divided into three groups of commands depending on their purpose. Data definition language (DDL), Data manipulation language (DML), Data control language (DCL).
+
+BASIC FEATURES OF SQL:
+
+SQL allows to create the database SQL is an ANCI standard. SQL executed queries against database SQL is used to insert retrieve on update.
+BASIC PRINCIPLE OF SQL:
+SQL oracle produces extension to SQL language is used to implemented complex application which cannot be easily expanded in SQL statement by client server. SQL is an database occurs language and concentrates an optimized the SQL written some basic principle for optimizing the SQL codes are, Optimize or minimizing loop processing Optimize condition statement, Avoid recursion.
+Codes are SQL are triggered whenever any changes are made. It operate completely with server environment eliminates client server network traffic.
+
+
+
+ 
+I.	DATA DEFINITION LANGUAGE:
+This data definition language is used to defines and change the structure of database. It can change the words in the dictionary.
+DDL STATEMENT:
+Create table Desc table Alter table Modify table Truncate table Rename table Primary table Select
+1.CREATE TABLE:
+This is used to create table in the database. A column name in the table must be unique.
+SYNTAX: 
+create table <table name> (<column name>datatype(size),<column name>datatype(size),…));
+2. DESC TABLE:
+Desc command is used to display the structured of the table along with field and constraints.
+SYNTAX: desc<table name>;
+3.ALTER TABLE:
+Alter is used to add new column and modify the exiting table.
+SYNTAX:
+ i) alter Table<table name> add(column name datatype(size));
+ii) alter Table<table name> modify(column name datatype(size));
+iii) alter Table<table name> modify(column name new datatype(size));
+
+
+
+
+
+
+4.DROP:
+	This command is used to delete the entire table structure. It is available that the table should be empty before it is dropped.
+SYNTAX: drop table <table-name>;
+
+5.TRUNCATE:
+	This command is used to delete all the entries from  the table.
+SYNTAX: truncate table<table-name>;
+
+6.RENAME:
+	This command is used to rename a table.
+SYNTAX: rename <old-table-name> to <new- table-name>;
+
+II) DATA MANIPULATION LANGUAGE:
+These commands are used to manipulate the data in database.
+COMMANDS:
+1. Insert 2. Select 3.Update 4.Delete
+
+1.INSERT: 
+The insert command is used to add records (or) tuples into the table which has been created using DDL commands to have specific structure. The entries must specify field constraints specified during creation.
+
+SYNTAXS:
+i) Insert into<table name> values (list of data values);
+ii) Insert into<table name> (column names) values (list of data values);
+
+2.SELECT:
+
+	This is used to display one or more rows in the table.
+
+
+
+
+
+SYNTAX:
+i) Select *from <table name>;
+ii)Select * from<table name> where<condition>;
+
+   		iii)Select column name from <table-name>;
+
+iv)Select column name from <table-name> order by name;
+
+v)Select distinct column name from <table-name>;
+3.UPDATE:
+	The update command is used to update field entries in a relation based on field condition either all entries along a field (or) a selected set can be updated. 
+
+
+SYNTAX: 
+i)Update<table-name>set<column .’values’>where<condition>;
+
+ii) Update<table-name> set column name:new values<condition>;
+
+4. DELETE:
+	This command is used to delete records in tuple for a relation. One can delete all tuples in a relation (or) select those for deletion using the keyword “where”.
+	
+SYNTAX:
+i) delete from<table name>;
+  ii) delete from <table name> where condition;
+
+III) TRANSACTION CONTROL LANGUAGE
+1.	COMMIT:
+It ends the current transaction and also undo any changes made to the database.
+SYNTAX: SQL> commit
+2.	ROLLBACK:
+It absorbs the transaction and roll back to commit statement.
+
+SYNTAX: rollback;
+
+3.	SAVE POINT:
+
+It is used to save the current transaction. It is used to roll back to undo the partial transaction.
+
+SYNTAX: savepoint<savepoint name>; 
+
+DATA DEFINITION LANGUAGE
+
+
+1.	CREATE TABLE
+SQL> create table books1(ISBN varchar2(15) primary key, title varchar2(10),author varchar2(20),quan_instock number(10),price number(5),pub_year date);
+Table created.
+DESCRIPTION OF TABLE:
+SQL> desc books1;
+Name	Null?	Type
+
+
+ISBN	NOT NULL VARCHAR2(15)
+TITLE	VARCHAR2(10)
+AUTHOR	VARCHAR2(20)
+QUAN_INSTOCK	NUMBER(10)
+PRICE	NUMBER(5)
+PUB_YEAR	DATE
+TABLE NAME:CUSTOMERS
+SQL> create table Customers( cust_id varchar2(10) primary key,cust_name varchar2(15), cust_addr varchar2(25),card_no number(10));
+Table created.
+DESCRIPTION OF TABLE:
+SQL> desc Customers;
+Name	Null?	Type
+
+
+CUST_ID	NOT NULL VARCHAR2(10) CUST_NAME		VARCHAR2(15)
+CUST_ADDR	VARCHAR2(25)
+CARD_NO	NUMBER(10)
+
+
+
+
+
+
+
+
+
+TABLE NAME:ORDERS1
+SQL>	create	table	orders1(order_no	number(5)	primary	key,cust_id varchar2(10),order_date date);
+Table created.
+DESCRIPTION OF TABLE:
+SQL> desc Orders1;
+Name	Null?	Type
+
+
+ORD_NO	NOT NULL NUMBER(5) CUST_ID		VARCHAR2(15)
+ORDER_DATE	DATE
+
+TABLE NAME:ORDERS_LIST1
+SQL>	create	table	orders_list1(order_no	number(5)	primary	key,ISBN varchar2(15),quantity number(5),ship_date date);
+Table created.
+Description of Table:
+SQL> desc orders_list1;
+Name	Null?	Type
+
+     ORD_NO	NOT NULL NUMBER(5) 
+      ISBN	VARCHAR2(15)
+QUANTITY                                       NUMBER(5)
+SHIP_DATE                                       DATE
+
+
+1.	SQL> create table Cust01 as select * from Customers; 
+Table created.
+
+
+
+
+
+SQL> desc cust01;
+Name	Null?	Type
+
+
+CUST_ID	NOT NULL VARCHAR2(10) CUST_NAME		VARCHAR2(15)
+CUST_ADDR	VARCHAR2(25)
+CARD_NO	NUMBER(10)
+
+2.	SQL> create table cust02 as select cust_id,cust_name from cust01; 
+Table created.
+SQL> desc cust02;
+Name	Null?	Type
+
+
+      CUST_ID	NOT NULL VARCHAR2(10)          
+      CUST_NAME	                     VARCHAR2(15)
+
+3.	SQL> create table cust03 as select * from cust01 where 1>2; 
+Table created.
+SQL> desc cust03;
+Name	Null?	Type
+
+CUST_ID	NOT NULL VARCHAR2(10) CUST_NAME		VARCHAR2(15)
+CUST_ADDR	VARCHAR2(25)
+CARD_NO	NUMBER(10)
+
+
+ 
+4.	ALTER THE TABLE BOOKS1 BY INCREASING THE FIELD WIDTH OF ISBN TO 25:
+SQL> alter table books1 modify isbn varchar2(25); 
+Table altered.
+
+SQL> desc books1;
+Name	Null?	Type
+
+
+ISBN	NOT NULL	VARCHAR2(25)
+TITLE		VARCHAR2(10)
+AUTHOR		VARCHAR2(20)
+QUAN_INSTOCK		NUMBER(10)
+PRICE		NUMBER(5)
+PUB_YEAR		DATE
+
+5.	DROP THE PRIMARY KEY FROM ORDERS1 TABLE
+SQL> alter table orders1 drop primary key; 
+Table altered.
+SQL> desc orders1;
+Name	Null?	Type
+
+
+ORD_NO	NUMBER(5)
+CUST_ID	VARCHAR2(15)
+ORDER_DATE	DATE
+
+
+
+
+
+
+
+
+6.	ADD THE PRIMARY KEY TO ORDERS1 TABLE
+SQL> alter table orders1 add primary key(ord_no); Table altered.
+
+SQL> desc orders1;
+Name                                              Null?	                       Type
+
+
+ORD_NO	 NOTNULL  NUMBER(5) CUST_ID		     VARCHAR2(15)
+ORDER_DATE	   DATE
+
+7.	ADD NEW COLUMN TO BOOKS1 TABLE 
+SQL> alter table books1 add edition varchar2(10); 
+Table altered.
+
+SQL> desc books1;
+Name	Null? Type
+
+
+ISBN	NOT NULL VARCHAR2(25)
+TITLE	VARCHAR2(10)
+AUTHOR	VARCHAR2(20)
+QUAN_INSTOCK	NUMBER(10)
+PRICE	NUMBER(5)
+PUB_YEAR	DATE
+EDITION	VARCHAR2(10)
+
+
+
+
+
+
+
+8.	DROP THE COLUMN FROM BOOKS1 TABLE
+SQL> alter table books1 drop(edition); 
+Table altered.
+SQL> desc books1;
+Name	Null?	Type
+
+
+ISBN	NOT NULL VARCHAR2(25)
+   TITLE	VARCHAR2(10)
+AUTHOR	VARCHAR2(20)
+QUAN_INSTOCK	NUMBER(10)
+PRICE	NUMBER(5)
+PUB_YEAR	DATE
+9.	RENAME THE CUST01 TABLE AS CUSTOMERS_1 TABLE
+SQL> alter table cust01 rename to customers_1; 
+Table altered.
+SQL> desc customers_1;
+Name	Null?	Type
+
+
+CUST_ID	NOT NULL VARCHAR2(10) CUST_NAME		VARCHAR2(15)
+CUST_ADDR	VARCHAR2(25)
+CARD_NO	NUMBER(10)
+
+10.	DROP CUSTOMER S_1 TABLE
+SQL> drop table customers_1; Table dropped.
+SQL> desc customers_1; ERROR:
+ORA-04043: object customers_1 does not exist
+
+
+11.	INSERTING RECORDS IN BOOKS1 TABLE
+SQL> insert into books1 values('I-101','Bold','Raja',200,250,'12-jan-2018'); 
+1 row created.
+SQL> insert into books1 values('I-102','DBMS','Abraham',300,500,'23-june-1998');
+1 row created.
+SQL> insert into books1 values('I-105','Architect','Rajesh',150,700,'26-sep-1995 ');
+1 row created.
+SQL> select * from books1;
+
+ISBN	TITLE	AUTHOR	QUAN_INSTOCK	PRICE	PUB_YEAR
+
+I-101	
+Bold	
+Raja	
+200	
+250	
+12-JAN-18
+
+I-102	
+DBMS	
+Abraham	
+300	
+500	
+23-JUN-98
+
+I-105	
+Architect	
+Rajesh	
+150	
+700	
+26-SEP-95
+INSERTING RECORDS IN CUSTOMERS TABLE
+SQL> insert into customers values('c10','geetha','medavakkam',21); 1 row created.
+SQL> insert into customers values('c12','bala','siruseri',25); 1 row created.
+SQL> insert into customers values('c14','manju','ponmar',27); 1 row created.
+SQL> select * from customers;
+
+CUST_ID	CUST_NAME	CUST_ADDR	CARD_NO
+
+c10	
+geetha	
+medavakkam	
+21
+c12	bala	siruseri	25
+c14	manju	ponmar	27
+ 
+INSERTING RECORDS IN ORDERS1 TABLE
+SQL> insert into orders1 values(21,'c10','12-jan-2017'); 
+1 row created.
+SQL> insert into orders1 values(22,'c12','24-apr-2015'); 
+1 row created.
+SQL> insert into orders1 values(23,'c14','24-may-2016'); 
+1 row created.
+SQL> select * from orders1;
+ORD_NO	CUST_ID	ORDER_DAT
+
+
+21	   c10	     12-JAN-17
+22	   c12	     24-APR-15
+23	   c14	    24-MAY-16
+
+INSERTING RECORDS INORDERS_LIST1 TABLE
+SQL> insert into orders_list1 values(21,'I-101',100,'12-jan-2012'); 
+1 row created.
+SQL> insert into orders_list1 values(22,'I-102',120,'14-feb-2016'); 
+1 row created.
+SQL> select * from orders_list1;
+ORDER_NO	ISBN	QUANTITY	SHIP_DATE
+
+
+21	I-101	100	12-JAN-12
+22	I-102	120	14-FEB-16
+
+
+
+
+
+
+
+
+
+
+
+
+1.	FIND THE NAMES OF ALL AUTHORS IN BOOKS1 RELATION
+SQL> select author from books1;
+
+AUTHOR
+
+
+Raja Abraham Rajesh
+2.	UPDATE THE CUST_ADDR AS GUINDY FOR CUST_NAME BALA IN THE CUSTOMERS TABLE
+SQL> update cust03 set cust_addr='guindy' where cust_name='bala'; 
+1 row updated.
+SQL> select * from cust03;
+CUST_ID	CUST_NAME	CUST_ADDR	CARD_NO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL> insert into research values(5001,'raja','networking');
+
+1 row created.
+
+SAVEPOINT
+SQL> insert into research values(5005,'bharath','datamining'); 
+1 row created
+SQL> savepoint s1; Savepoint created.
+SQL> insert into research values(5009,'ganesh','security'); 
+1 row created.
+SQL> savepoint s2; Savepoint created.
+
+ROLLBACK
+SQL> rollback to s1; Rollback complete.
+SQL> select * from research; 
+	REG_NO NAME	TITLE
+
+5001       raja	         networking
+5005     bharath	   datamining SQL> rollback;
+Rollback complete.
+SQL> select * from research;
+ no rows selected
+SQL> insert into research values(5009,'ganesh','security'); 
+1 row created.
+SQL> insert into research values(5005,'bharath','datamining');
+1 row created.
+
+
+
+SQL> insert into research values(5001,'raja','networking'); 
+1 row created.
+
+COMMIT
+SQL> commit; Commit complete.
+
+SQL> select * from research; 
+REG_NO	NAME	TITLE
+
+5009	ganesh	security
+5005	bharath	datamining
+5001	raja	networking
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESULT:
+Thus the data definition commands, data manipulation commands for inserting, deleting, updating and retrieving tables transaction control statement is executed and the output is verified successfully.
