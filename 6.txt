@@ -1,0 +1,95 @@
+AIM:
+To implement a triggers using PL|SQL program.
+THEROM:
+A database triggers is stored in PL|SQL program unit associated with a specific task. No need to all triggers explicit. Triggers are fixed automatically during the occurrence of particular event.
+PARTS OF TRIGGERS:
+Triggering event Triggering restriction
+TRIGGERING EVENT:
+It is a statement, that cases a trigger to be fixed.
+TIGGERING RESTRUCTION:
+A trigger action is the procedure that causes triggering event to be true.
+
+OUTPUT
+SQL> select * from loan;
+
+LOAN_NO	               BRANCH_NAME                            LOAN_AMOUNT
+    	-	 		 	
+
+100	ashoknagar	26620
+101	tnagar	35000
+102	besant nagar	70000
+103	medavakkam	95000
+104	adyar	85000
+
+
+
+
+
+
+SQL> create or replace trigger trig_loan before insert on loan 
+   2 for each row
+3	begin
+4	if(:new.loan_amount<=0)
+5	then raise_application_error(-2000,'inserted negative amount'||:new.loan_am ount);
+6	end if;
+7	end trig_loan;
+8 /
+
+Trigger created.
+
+SQL> insert into loan values (123,'redwood',-2000);
+            insert into loan values(123,'redwood',-2000);
+               ERROR at line 1:
+            ORA-21000: error number argument to raise_application_error of -2000 is out of range
+ORA-06512: at "CSE050.TRIG_LOAN", line 3
+ORA-04088: error during execution of trigger 'CSE050.TRIG_LOAN'
+
+SQL> insert into loan values (123,'redwood',3000);
+
+1 row created.
+SQL> create or replace trigger loan_trig before update of loan_amount on loan 
+   2 for each row
+3	when(new.loan_amount<old.loan_amount)
+4	begin
+5	raise_application_error(-20002,'balance must not be reduced'); 6 end loan_trig;
+7 /
+
+Trigger created.
+
+
+
+SQL> update loan set loan_amount=400 where branch_name='tnagar'; update loan set loan_amount=400 where branch_name='tnagar'
+*
+ERROR at line 1:
+ORA-20002: balance must not be reduced
+
+ORA-06512: at "CSE050.LOAN_TRIG", line 2
+ORA-04088: error during execution of trigger 'CSE050.LOAN_TRIG'
+
+SQL> select * from loan;
+
+LOAN_NO       BRANCH_NAME           LOAN_AMOUNT
+
+
+100                      ashoknagar	             26620
+101                      tnagar	             35000
+102                     besant nagar	            70000
+103                     medavakkam	             95000
+104                     adyar	             85000
+123                    redwood	            3000
+
+6	rows selected.
+
+
+
+
+
+
+
+
+
+
+
+
+RESULT:
+Thus the above procedure for the triggers are successfully and the output is verified 
