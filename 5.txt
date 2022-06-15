@@ -1,0 +1,182 @@
+AIM:
+To implement and execute in oracle database using procedural language.
+
+PROCEDURE:
+Procedure is a subprogram used to perform an action. Replace the procedure if it is already exits.
+3 MODES:
+->IN- modes you specify a value for the argument at time execution of the procedure.
+->OUT-power back a value the calling program.
+->INPUT-where calling the procedure you must specify the and that procedure powers value back to the calling procedure.
+SYNTAX:
+Create or	replace procedure<procedure-name>(argument{input, output}data type){is,as}
+Variable declaration Begin
+Pl SQL subprogram body Exception
+Exception PL SQL stock End;
+
+
+
+
+
+
+
+
+
+
+FUNCTION:
+A function is subprogram that accepts arguments and returns a column values to the caller.
+SYNTAX:
+Create or replace function <function name><parameter{is, out, isout })return<data type>is variable declaration begins
+
+
+PL|SQL subprogram body Exception
+Exception PL|SQL block Return statement
+End;
+
+
+OUTPUT
+Create table emp9(emp_no number(10),emp_name varchar2(50),emp_salary number(10);
+Table created.
+Insert emp9 into values (200,’karthick’,25000);
+1 row created;
+Insert emp9 into values(201,’naveen’,35000); 
+1 row created;
+
+Insert emp9 into values(202,’sanjay’,65000); 
+1 row created;
+Insert emp9 into values(203,’arun’,60000);
+ 1 row created;
+Insert emp9 into values(204,’suresh’,72000); 
+1 row created;
+
+
+
+
+SQL> select*from emp9;
+
+EMP_NO EMP_NAME                             EMP_SALARY
+
+
+
+200      karthick	25000
+201      naveen	35000
+202      sanjay	65000
+203      arun	 60000
+204     suresh	72000
+
+Create table loan (loan_no number(5),branch 	name varchar2(15),loan_amount number(5));
+
+PROCEDURE 44:
+SQL> set serveroutput on;
+SQL> create or replace procedure raise_balance(pno in loan.loan_no%type) 2 is
+3	begin
+4	update loan
+5	set loan_amount=loan_amount*1.10
+6	where loan_no=pno;
+7	end raise_balance;
+8 /
+
+Procedure created.
+
+SQL> execute raise_balance(100);
+
+PL/SQL procedure successfully completed.
+
+SQL> select*from loan where loan_no=100;
+
+
+
+
+
+
+
+LOAN_NO BRANCH_NAME	LOAN_AMOUNT
+
+
+
+100 ashoknagar	26620
+PROCEDURE 2:
+
+SQL> create or replace procedure query_emp9(pid in emp9.emp_no %type,pname out	emp9.emp_name %type,p_sal out emp9.emp_salary %type)
+2	is
+3	begin
+4	select emp_name,emp_salary into pname,p_sal from emp9 where emp_no=pid; 5 end query_emp9;
+6 /
+
+Procedure created.
+
+SQL> variable gname varchar2(25) SQL> variable gsal number
+SQL> execute query_emp9(203,:gname,:gsal);
+
+
+PL/SQL procedure successfully completed.
+
+SQL> print gname;
+
+
+GNAME
+
+
+Arun 
+
+FUNCTION 1:
+SQL> create or replace function g_sal(pid in emp9.emp_no %type) 2 return number
+3	is
+4	v_sal emp9.emp_salary %type:=0; 5 begin
+6 select emp_salary into v_sal from emp9 7 where emp_no=pid;
+8	return v_sal;
+9	end g_sal;
+10 /
+
+
+Function created.
+
+SQL> variable gsal number; SQL> begin :gsal:=g_sal(203); 
+2 end;
+3 /
+
+PL/SQL procedure successfully completed.
+
+SQL> print gsal;
+
+GSAL
+
+
+
+60000
+
+
+
+
+FUNCTION 2:
+SQL> create or replace function tax(p_val in number) 2 return number
+3	is
+4	begin
+5	return(p_val*0.08);
+6	end tax;
+7 /
+
+Function created.
+
+
+SQL> select loan_amount,tax(loan_amount) from loan;
+
+LOAN_AMOUNT   TAX(LOAN_AMOUNT)
+     
+
+
+26620	   2129.6
+35000	2800
+70000	5600
+          95000	7600
+85000	6800
+
+
+
+
+
+
+
+
+
+RESULT:
+Thus the above program for the procedures and function are implemented successfully and output is verified.
