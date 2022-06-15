@@ -1,0 +1,592 @@
+AIM:
+To execute database querying single queries nested queries sub queries and join.
+SELECT:
+SYNTAX 1 : select column name 1,column name 2 from<table name>
+SYNTAX 2: select * from<table name>;
+SYNTAX 3:select * from<table name>where <condition>;
+Select clause defines the type of the object or values returned by the query. The         from clause defines the scope of the query by declaring one or more identification variable which can be referenced in the select and where clause, an identification variable represents are of the following element.
+     The abstract scheme name of an entity , an element of a collection relationship, an element of a single valued relationship, a member of a collection that is multiple side of a one to many relationship The where clause is a condition expression that restrict the object or value retrieved by the query.
+Although the clause is optional most queries have a where clause. The having clause is used with the group by clause further restrict the query result according to a condition expression. The orders by clause sort the object or values returned by the queries into a specified order.
+SUBQUERIES WITH THE SELECT STATEMENT:
+Selects column name [column-name]
+From table1[table2]
+Where column name operator Select column name [column-name] From table 1[table 2]
+[where]
+ 
+SUBQUERIES WITH THE INSERT STATEMENT:
+Insert into table name [column 1,([ column 2])] Select [* column 1[ column 2]]
+From table 1[table 2] [Where value operator]
+SUBQUERIES WITH THE DELETE STATEMENTS:
+Delete from table name
+[where operator[values](select column-name from the table name(where)].
+JOIN COMMANDS:
+INNER JOIN:
+Commands return the matching rows the table that are being joined.
+LEFT OUTER JOIN:
+Command return matching rows from the tables being joined and also non-matching row from the table is the result and places null values in the attribute’s that comes from the right side table.
+RIGHT OUTER JOIN:
+Command returns matching rows from the table being joined and also non-matching rows from that right table in the result and places null values in the attributes that come from the left side table.
+
+1.	FIND	THE	NAMES	OF	ALL	NAMES	IN	BOOKS1	RELATION ELIMINATE DUPLICATE
+
+SQL> SELECT DISTINCT AUTHOR FROM BOOKS1; AUTHOR
+
+Abraham Raja Rajesh 
+2.	DISPLAY	IN	THE	BOOKS	TABLE	WITH	ATTRIBUTE	PRICE MULTIPLIED BY 10.
+SQL> SELECT PRICE *10 FROM BOOKS1; PRICE*10
+
+2500
+5000
+7000
+3.	FIND ALL TITLE FOR BOOKS WHOSE AUTHOR IS RAJA AND PRICE GREATER THAN 100.
+SQL> select title from books1 where author='Raja' and price>100; 
+TITLE    Bold
+
+
+I-101
+I-101 I-102 I-105
+
+4.	FIND ALL ISBN FOR BOOKS WITH BOOK PRICE BETWEEN 150 AND 700.
+SQL> select ISBN from Books1 where price between 100 and 700; 
+ISBN
+5.	FIND THE NAMES OF CUSTOMER WHOSE NAME INCLUDES THE CHARACTER.
+SQL> select cust_name from cust03 where cust_name like ' 	%'; CUST_NAME
+
+geetha bala manju
+
+
+
+6.	FIND THE NAMES OF CUSTOMER WHOSE ADDRESS STARTS WITH SUBSTRING ‘P’.
+SQL> select cust_name from cust03 where cust_addr like 'p%'; CUST_NAME
+Manju
+
+7.	DISPLAY THE ENTIRE BOOK TABLE IN DESCENDING ORDER OF PUB_YEAR.
+SQL> select * from books1 order by pub_year asc;
+
+ISBN	TITLE	AUTHOR		QUAN_INSTOCK	PRICE	PUB_YEAR
+
+I-105	
+Architect	
+Rajesh		
+150	
+700	
+26-SEP-95
+I-102	DBMS	Abraham		300	500	23-JUN-98
+I-101	Bold	Raja		200	250	12-JAN-18
+
+
+8.	FIND TOTAL NUMBER OF CUSTOMER. 
+SQL> select count(cust_id) from cust03; COUNT(CUST_ID)
+3
+9.	FIND ALL THE CUSTOMER NUMBER THAT APPEARS IN THE CUSTOMER RELATION WITH NULL VALUES FOR CARD_NO.
+SQL> insert into cust03 values('c11','ranji','cuddalore',32); 1 row created.
+SQL> insert into cust03 values('c11','ranji','cuddalore',null); 1 row created.
+SQL> select * from cust03;
+CUST_ID	CUST_NAME	CUST_ADDR	CARD_NO
+
+
+c10	geetha	medavakkam	21
+c12	bala	guindy	25
+c14	manju	ponmar	27
+c11	ranji	cuddalore	32
+c11	ranji	cuddalore	
+
+SQL> select cust_name from cust03 where card_no is null; CUST_NAME
+
+Ranji
+
+SUB QUERIES:
+SALESMAN TABLE:
+SQL>	create	table	salesman(s_id	number(5),name	varchar2(15),city varchar2(25),commission decimal(4,2));
+Table created.
+SQL> insert into salesman values(5001,'james hoog','new york',0.15); 
+1 row created.
+SQL> insert into salesman values(5002,'nail knite','paris',0.13); 
+1 row created.
+SQL> insert into salesman values(5005,'pit alex','london',0.11); 
+1 row created.
+SQL> insert into salesman values(5006,'mc lyon','paris',0.14); 
+1 row created.
+SQL> insert into salesman values(5003,'lauson hen','san jose',0.12); 
+1 row created.
+SQL> insert into salesman values(5007,'paul adam','rome',0.13); 
+1 row created.
+SQL> select * from salesman;
+
+S_ID	NAME	CITY	COMMISSION
+
+
+5001	james hoog	new york	.15
+5002	nail knite	paris	.13
+5005	pit alex	london	.11
+5006	mc lyon	paris	.14
+5003	lauson hen	san jose	.12
+5007	paul adam	rome	.13
+6 rows selected. 
+ORDERS TABLE:
+SQL> create table orders(ord_no number(5),purch_amnt decimal(5,3), ord_date date, cust_id number(5), s_id number(5));
+Table created.
+SQL> insert into orders values(7001,150.5,'05-dec-2012',3005,5002); 
+1 row created.
+SQL> insert into orders values(7009,270.65,'10-sep-2012',3001,5005); 
+1 row created.
+SQL> insert into orders values(7002,65.26,'05-oct-2012',3002,5001); 
+1 row created.
+SQL> insert into orders values(7002,110.5,'17-aug-2012',3009,5003); 
+1 row created.
+SQL> update orders set ord_no=7004 where cust_id=3009; 
+1 row updated.
+SQL> insert into orders values(7005,145.5,'10-sep-2012',3005,5002); 
+1 row created.
+SQL> insert into orders values(7007,135.5,'19-july-2012',3007,5001); 
+1 row created.
+SQL> insert into orders values(7009,193.5,'10-sep-2012',3008,5006); 
+1 row created.
+SQL> insert into orders values(7010,304.5,'25-apr-2012',3002,5001); 
+1 row created.
+SQL> insert into orders values(7011,314.5,'23-sep-2012',3010,5007); 
+1 row created.
+SQL> select * from orders;
+
+
+ORD_NO		PURCH_AMNT	ORD_DATE	    CUST_ID	        S_ID
+
+7001	150.5	10-SEP-12	3005	5002
+7009	270.65	10-SEP-12	3001	5005
+7002	65.26	05-OCT-12	3002	5001
+7004	110.5	17-AUG-12	3009	5003
+7005	145.5	10-SEP-12	3005	5002
+7007	135.5	19-JUL-12	3007	5001
+7009	193.5	10-SEP-12	3008	5006
+7010	304.5	25-APR-12	3002	5001
+7011	314.5	23-SEP-12	3010	5007
+
+9 rows selected.
+
+
+CUSTOMER TABLE:
+SQL>	create	table	customer(cust_id	number(5),cust_name	varchar2(15),city varchar2(15),grade number(5) ,s_id number(5));
+Table created.
+SQL> insert into customerr values(3002,'nickrimando','new york',100,5001); 
+1 row created.
+SQL> insert into customerr values(3005,'graham zushi','california',200,5002); 
+1 row created.
+SQL> insert into customerr values(3001,'brad guzan','london',null,5005); 
+1 row created.
+SQL> insert into customerr values(3004,'john','paris',300,5006); 
+1 row created.
+SQL> insert into customerr values(3007,'davis','new york',400,5001); 
+1 row created.
+SQL> insert into customerr values(3009,'camero','london',100,5002); 
+1 row created.
+SQL> insert into customerr values(3003,'jozy','moscow',200,5007); 
+1 row created.
+SQL> select * from customerr;
+CUST_ID	CUST_NAME	CITY	GRADE	S_ID
+
+
+3002	nickrimando	new york	100	5001
+3005	graham zushi	california	200	5002
+3001	brad guzan	london		5005
+3004	john	paris	300	5006
+3007	davis	new york	400	5001
+3009	camero	london	100	5002
+3003	jozy	moscow	200	5007
+
+7rows selected.
+
+1.	WRITE A QUERY TO DISPLAY ALL THE ORDERS FROM ORDERS TABLE ISSUED BY THE SALESMAN ‘JAMES HOOG’.
+SQL>select * from orders where salesman_id = (select salesman_id fom salesman where name = ‘james hoog’);
+ORD_NO	CUST_ID	ORD_DATE	PURCH_AMNT	S_ID
+
+
+7002	65.26	05-OCT-12	3002	5001
+7007	135.5	19-JUL-12	3007	5001
+7010	304.5	25-APR-12	3002	5001
+
+2.	WRITE A QUERY TO DISPLAY ALL THE ORDERS WHICH VALUES ARE GREATER THAN THE AVERAGE ORDER VALUE FOR 10TH SEP 2012.
+SQL> select * from orders where purch_amnt>(select avg(purch_amnt) from orders where ord_date='10-sep-2012');
+ORD_NO	PURCH_AMNT	ORD_DATE	CUST_ID	S_ID
+ 	   
+
+7009	270.65	10-SEP-12	3001	5005
+7009	193.5	10-SEP-12	3008	5006
+7010	304.5	25-APR-12	3002	5001
+7011	314.5	23-SEP-12	3010	5007
+
+
+
+
+
+1.	WRITE A QUERY TO FIND THE SUM OF THE AMOUNTS FROM THE ORDERS TABLE, GROUPED BY DATE, ELEMINATING ALL THOSE DATES WHERE THE SUM WAS NOT ATLEAST 100 ABOVE THE MAXIMUM AMOUNT FOR THAT DATE.
+SQL> select ord_date, sum(purch_amnt) from orders a group by ord_date having
+           sum(purch_amnt)>(select 100.00+max(purch_amnt)from orders b where a.ord_date=       
+           b.ord_date);
+ORD_DATE	SUM(PURCH_AMNT)
+
+
+10-SEP-12	760.15
+
+2.	WRITE A QUERY TO EXTRACT THE DATE FROM THE CUSTOMER TABLE IF AND ONLY IF ONE OR MORE OF THE CUSTOMERS IN THE CUSTOMER TABLE ARE LOCATED IN ‘LONDON’.
+SQL> select cust_id,cust_name,city from customerr where exists(select * from customer where city='london');
+
+CUST_ID	CUST_NAME	CITY
+
+3002	
+nickrimando	
+new york
+3005	graham zushi	california
+3001	brad guzan	london
+3004	john	paris
+3007	davis	new york
+3009	camero	london
+3003	jozy	moscow
+7 rows selected.
+
+3.	WRITE A QUERY TO FIND ALL THE SALESMAN WHO WORKED FOR ONLY ONE CUSTOMER.
+SQL> select * from salesman where s_id in(select distinct s_id from customer a where exists(select * from customer b where a.s_id=b.s_id and a.cust_name=b.cust_name));
+
+
+S_ID	NAME	CITY	COMMISSION
+
+
+5001	james hoog	new york	.15
+5002	nail knite	paris	.13
+5005	pit alex	london	.11
+5006	mc lyon	paris	.14
+5007	paul adam	rome	.13
+
+
+4.	WRITE A QUERY TO FIND ALL THOSE CUSTOMER WHO HOLD A DIFFERENT GRADE THAN ANY CUSTOMER OF THE CITY ‘NEW YORK’.
+SQL> select * from customerr where not grade=any(select grade from customer where city='new york');
+CUST_ID	CUST_NAME	CITY	GRADE	S_ID
+
+
+3004	john	paris	300	5006
+3003	jozy	moscow	200	5007
+3005	graham zushi	california	200	5002
+
+TABLE: EMP
+SQL> create table empl(eno number(5) primary key,ename varchar2(15),job varchar2(15),deptno number(10),sal number(10));
+Table created. TABLE: DEPART
+SQL>	create	table	depart(deptno	number(10),dname	varchar2(15),loc varchar2(15));
+Table created.
+
+TABLE: STAFF
+SQL>	create	table	staff	(staff_id	number(5),s_name	varchar2(20),exp number(5),age number(5));
+Table created. TABLE: BOOK
+SQL>	create	table	book(book_id	number(5),b_name	varchar2(15),edition number(5));
+Table created.
+SQL> alter table staff add primary key(staff_id); Table altered.
+
+TABLE: ISSUE
+SQL> create table issue(staff_id number(5),book_id number(5),day date,primary key(staff_id,book_id));
+Table created.
+
+SQL> desc depart;
+Name	Null?	Type
+
+
+DEPTNO	NUMBER(10)
+
+DNAME LOC		VARCHAR2(15) VARCHAR2(15)
+SQL> desc empl;		
+
+Name	
+Null?	
+Type
+
+ENO	
+NOT NULL	
+NUMBER(5)
+ENAME		VARCHAR2(15)
+JOB DEPTNO SAL		VARCHAR2(15) NUMBER(10) NUMBER(10)
+
+SQL> desc book;		
+
+Name	
+Null?	
+Type
+
+BOOK_ID B_NAME EDITION		
+NUMBER(5) VARCHAR2(15) NUMBER(5)
+
+SQL> desc staff; Name	
+
+Null?	
+
+Type
+STAFF_ID S_NAME	
+NOT NULL	NUMBER(5) VARCHAR2(20)
+EXP	NUMBER(5)
+AGE	NUMBER(5)
+
+SQL> insert into empl values(1,'arjun','ap',1,10000); 
+1 row created.
+SQL> insert into empl values(2,'bharath','asp',2,20000); 
+1 row created.
+SQL> insert into empl values(3,'aparna','asp',2,20000); 
+1 row created.
+SQL> insert into empl values(4,'karthik','ap',1,10000); 
+1 row created.
+SQL> select * from empl;
+
+
+ENO	ENAME	JOB	DEPTNO	SAL
+
+
+1	arjun	ap	1	10000
+2	bharath	asp	2	20000
+3	aparna	asp	2	20000
+4	karthik	ap	1	10000
+
+
+SQL> insert into depart values(1,'accounting','newyork'); 
+1 row created.
+SQL> insert into depart values(2,'research','dallas'); 
+1 row created.
+SQL> insert into depart values(10,'sales','chicago'); 
+1 row created.
+SQL> insert into depart values(40,'operation','boston'); 
+1 row created.
+
+
+
+
+
+
+SQL> select * from depart;
+DEPTNO	DNAME	LOC
+
+
+1	accounting	newyork
+2	research	dallas
+10	sales	chicago
+40	operation	boston
+
+SQL> insert into staff values(11,'john',8,27); 
+1 row created.
+SQL> insert into staff values(12,'priya',9,29); 
+1 row created.
+SQL> insert into staff values(13,'beulah',13,36); 
+1 row created.
+SQL> select * from staff;
+STAFF_ID	S_NAME	EXP	AGE
+
+
+11	john	8	27
+12	priy	9	29
+13	beulah	13	36
+
+
+SQL> insert into book values(1023,'oops',3); 
+1 row created.
+SQL> insert into book values(1056,'dbms',2);
+1 row created.
+SQL> insert into book values(1036,'os',1); 
+1 row created.
+
+
+
+
+
+
+SQL> select * from book;
+BOOK_ID	B_NAME	EDITION
+
+
+1023	oops	3
+1056	dbms	2
+1036	os	1
+
+INSERTING RECORDS IN ALL THE CREATED TABLES:
+SQL> insert into issue values(11,1023,'11-aug-2014');
+           insert into issue values(11,1023,'11-aug-2014');
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+SQL> insert into issue values(11,1023,'11-aug-2014'); 
+1 row created.
+SQL> insert into issue values(12,1056,'15-dec-2014');
+ 1 row created.
+
+SQL> select * from issue;
+
+STAFF_ID	BOOK_ID	DAY
+
+
+11	1023	11-AUG-14
+
+12	1056	15-DEC-14
+
+  JOIN COMMANDS:
+EQUI-JOIN:
+DISPLAY THE EMPLOYEE DETAILS, DEPARTMENTS THAT THE DEPARTMENT ARE SAME IN BOTH THE EMP AND DEPT.
+SQL> select * from empl,depart where empl.deptno=depart.deptno;
+
+
+
+ENO  ENAME JOB DEPTNO	SAL	DEPTNO	DNAME	LOC
+
+
+	4	karthik	ap	1	10000	1	accounting	newyork
+	1	arjun	ap	1	10000	1	accounting	newyork
+3		aparna	asp	2	20000	2	research	dallas
+2		bharath	asp	2	20000	2	research	dallas
+
+NON EQUI-JOIN:
+DISPLAY	THE	EMPLOYEE	DETAILS,	DEPARTMENT	THAT	THE DEPARTMENT ARE NOT SAME IN BOTH THE EMP AND DEPT.
+SQL> select * from empl,depart where empl.deptno!=depart.deptno;
+ENO	ENAME	JOB DEPTNO	SAL	DEPTNO	DNAME	LOC
+
+
+1	arjun	ap	1	10000	2	research	dallas
+1	arjun	ap	1	10000	10	sales	Chicago
+1	arjun	ap	1	10000	40	operation	boston
+
+ENO	ENAME	JOB DEPTNO	SAL	DEPTNO	DNAME	LOC
+
+
+2	bharath	asp	2	20000	1	accounting	newyork
+2	bharath	asp	2	20000	10	sales	chicago
+2	bharath	asp	2	20000	40	operation	boston
+ 
+   ENO	ENAME	JOB DEPTNO	SAL	DEPTNO	DNAME	LOC
+
+
+3	aparna	asp	2	20000	1	accounting	newyork
+3	aparna	asp	2	20000	10	sales	chicago
+3	aparna	asp	2	20000	40	operation	boston
+
+
+ENO	ENAME	JOB DEPTNO	SAL	DEPTNO	DNAME	LOC
+
+
+4	karthik	ap	1	10000	2	research	dallas
+4	karthik	ap	1	10000	10	sales	chicago
+4	karthik	ap	1	10000	40	operation	boston
+
+12 rows selected.
+
+
+LEFT OUTER JOIN:
+
+
+DISPLAY ENAME AND LOCATION USING LEFT OUTER JOIN.
+
+
+SQL>	select	empl.ename,loc	from	empl	left	outer	join	depart	on empl.deptno=depart.deptno;
+ENAME	LOC
+
+
+karthik	newyork
+arjun	newyork
+aparna	dallas
+bharath	dallas 
+
+
+
+
+RIGHT OUTER JOIN:
+WRITE A QUERY TO DISPLAY ENAME , JOB AND SALARY USING RIGHT OUTER JOIN.
+SQL>	select	empl.ename,job,sal	from	empl	right	outer	join	depart	on empl.deptno=depart.deptno;
+ENAME         JOB                   SAL
+
+
+arjun	    ap	10000
+bharath	      asp	       20000
+aparna	asp	       20000
+karthik	  ap	      10000
+
+6 rows selected.
+
+
+SELF JOIN:
+
+WRITE A QUERY TO DISPLAY EMPLOYEE NAME SELF JOIN.
+
+SQL> select distinct ename from empl x,depart y where x.deptno=y.deptno;
+
+ENAME
+
+
+aparna bharath arjun karthik
+SUB-QUERY:
+UPDATE DEPTNO BY ADDING EMP NO AND KEEP THAT AS DEPTNO FOR EMPLOYEE 4
+SQL> update empl set deptno=(select sum(empno) from depart)where eno=4; update empl set deptno=(select sum(empno) from depart)where eno=4
+*
+ERROR at line 1:
+ORA-00904: "EMPNO": invalid identifier
+
+
+
+SQL> update empl set deptno=(select sum(eno) from depart)where eno=4; 
+1 row updated.
+SQL> select * from empl;
+
+ENO	ENAME	JOB	DEPTNO	SAL
+
+
+1	arjun	ap	1	10000
+2	bharath	asp	2	20000
+3	aparna	asp	2	20000
+4	karthik	ap	16	10000
+
+DISPLAY STAFF NAME WHO HAS THE BOOK_ID =1023.
+SQL> select s_name from staff where staff_id in(select staff_id from issue where book_id=1023);
+S_NAME
+
+
+john
+DISPLAY STAFF-ID WHOSE EDITION IS 2.
+SQL> select staff_id from issue where book_id in(select book_id from book where edition=2);
+           select staff_id from issue where book_id in(select book_id from book where edition=2);
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+SQL> select staff_id from issue where book_id in(select book_id from book where edition=2);
+STAFF_ID
+
+
+12
+DISPLAY EDITON OF THE BOOK USED BY STAFF CHRIS.
+SQL> select edition from book where book_id in(select book_id from issue where staff_id in(select staff_id from staff where s_name='john');
+          select edition from book where book_id in(select book_id from issue where staff_id in(select staff_id from staff where s_name='john');
+
+
+*
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+SQL> select edition from book where book_id in(select book_id from issue where staff_id in(select staff_id from staff where s_name='john'));
+select edition from book where book_id in(select book_id from issue where staf f_id in(select staff_id from staff where s_name='john'));
+   ERROR at line 1:
+ORA-00942: table or view does not exist
+
+SQL> select edition from book where book_id in(select book_id from issue where staff_id in(select staff_id from staff where s_name='john'));
+EDITION
+
+
+3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESULT:
+Thus the database querying simple, queries, nested queries, sub queries and join is executed the output is verified successfully.
